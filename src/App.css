@@ -215,9 +215,13 @@ tfoot .e-indentcell {
   overflow: hidden;
 }
 
+#sblist-wrapper, #sidelistwrapper, .listmaincontent, #listSidebar, .e-content-animation {
+   height: 100% !important;
+}
+
 #listContent {
-  max-height: 391px;
-  overflow: auto;
+  height: calc(100vh - 185px);
+  overflow-x: auto;
   white-space: nowrap;
 }
 
@@ -225,21 +229,13 @@ tfoot .e-indentcell {
   font-size: 14px;
   padding: 15px;
   margin-left: 170px;
-  /* height: 100% !important; */
+  
 }
 
 #sblist-wrapper.control-section {
   padding: 0;
   margin-left: -25px;
-  height: 451px;
-}
-
-#listSidebarList {
-  height: inherit !important;
-}
-
-#sblist-wrapper .listmaincontent {
-  height: 100% !important;
+  height : 100% !important;
 }
 
 #sblist-wrapper #left {
@@ -355,6 +351,11 @@ tfoot .e-indentcell {
   margin-top: 6px;
 }
 
+.fluent-dark .country_image, .fluent .country_image {
+  margin-left: 10px;
+}
+
+
 .treeviewdiv {
   margin-top: 2px;
 }
@@ -391,6 +392,32 @@ tfoot .e-indentcell {
 .footer-sum .e-menu-item[aria-label="Max"] .e-caret,
 .footer-sum .e-menu-item[aria-label="Count"] .e-caret {
   margin-top: 3px !important;
+}
+
+.fluent-dark .footer-sum .e-menu-item[aria-label="Sum"],
+.fluent .footer-sum .e-menu-item[aria-label="Sum"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Average"],
+.fluent .footer-sum .e-menu-item[aria-label="Average"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Min"],
+.fluent .footer-sum .e-menu-item[aria-label="Average"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Max"],
+.fluent .footer-sum .e-menu-item[aria-label="Max"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Count"], 
+.fluent .footer-sum .e-menu-item[aria-label="Count"] {
+  margin-top: -8px !important;
+}
+
+.fluent-dark .footer-sum .e-menu-item[aria-label="Sum"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Sum"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Min"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Max"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Max"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Count"] .e-caret, 
+.fluent .footer-sum .e-menu-item[aria-label="Count"] .e-caret {
+  margin-top: 2px !important;
 }
 
 /* When the RTL checkbox is enabled in the single-column settings, the position shifts slightly downward, so a top margin adjustment is required to correct the alignment. */
@@ -499,3 +526,7 @@ th[aria-colindex="15"] .e-grptogglebtn {
   align-items: center;
 }
 
+
+.e-dlg-content {
+  height: 100% !important;
+}

@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@syncfusion/ej2-react-buttons": "^29.1.34",
-    "@syncfusion/ej2-react-calendars": "^29.1.35",
-    "@syncfusion/ej2-react-dropdowns": "^29.1.37",
-    "@syncfusion/ej2-react-grids": "^29.1.37",
-    "@syncfusion/ej2-react-inputs": "^29.1.34",
-    "@syncfusion/ej2-react-lists": "^29.1.34",
-    "@syncfusion/ej2-react-navigations": "^29.1.37",
-    "@syncfusion/ej2-react-popups": "^29.1.37",
-    "@syncfusion/ej2-react-progressbar": "^29.1.33",
+    "@syncfusion/ej2-react-buttons": "*",
+    "@syncfusion/ej2-react-calendars": "*",
+    "@syncfusion/ej2-react-dropdowns": "*",
+    "@syncfusion/ej2-react-grids": "*",
+    "@syncfusion/ej2-react-inputs": "*",
+    "@syncfusion/ej2-react-lists": "*",
+    "@syncfusion/ej2-react-navigations": "*",
+    "@syncfusion/ej2-react-popups": "*",
+    "@syncfusion/ej2-react-progressbar": "*",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -33,7 +33,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "ci-publish": "gulp publish-sample"
   },
   "eslintConfig": {
     "extends": [

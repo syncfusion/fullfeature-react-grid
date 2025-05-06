@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo, JSX, useEffect, MouseEventHandler } from 'react';
+import React, { useRef, useState, useMemo, JSX } from 'react';
 import {
   GridComponent, Inject, ColumnMenu, ColumnChooser, RowDD, Freeze,
   InfiniteScroll, CommandColumn, ContextMenu, VirtualScroll, Filter, Search, LazyLoadGroup, Reorder, Resize, Sort, PdfExport,
@@ -15,7 +15,6 @@ import {
   ContextMenuItem,
   ContextMenuItemModel,
   SortSettingsModel,
-  TextWrapSettingsModel,
   SelectionSettingsModel,
   parentsUntil,
   CommandModel,
@@ -30,7 +29,6 @@ import {
   FilterBarMode,
   IndicatorType,
   GridColumn,
-  columnDrag,
   PageEventArgs,
   GroupEventArgs,
   FilterEventArgs,
@@ -47,11 +45,11 @@ import {
 import {
   Aggregate, AggregateColumnsDirective, AggregateColumnDirective, AggregateDirective, AggregatesDirective
 } from '@syncfusion/ej2-react-grids';
-import { AsyncSettingsModel, ChangedEventArgs, FileInfo, NumericTextBox, RatingComponent, SuccessEventArgs, TextBoxComponent, UploaderComponent } from '@syncfusion/ej2-react-inputs'
+import { AsyncSettingsModel, ChangedEventArgs, FileInfo, NumericTextBox, RatingComponent, TextBoxComponent, UploaderComponent } from '@syncfusion/ej2-react-inputs'
 import { DataManager, Predicate, Query } from '@syncfusion/ej2-data';
-import { createElement, EmitType, Internationalization, isNullOrUndefined, setCulture, closest } from '@syncfusion/ej2-base';
+import { createElement, Internationalization, isNullOrUndefined, setCulture, closest } from '@syncfusion/ej2-base';
 import { AutoComplete, DdtSelectEventArgs, DropDownListComponent, DropDownTree, FieldSettingsModel } from '@syncfusion/ej2-react-dropdowns';
-import { MenuComponent, MenuItemModel, SidebarComponent } from '@syncfusion/ej2-react-navigations';
+import { MenuComponent, SidebarComponent } from '@syncfusion/ej2-react-navigations';
 import { ButtonComponent, CheckBox, CheckBoxComponent, ChipDirective, ChipListComponent, ChipsDirective } from '@syncfusion/ej2-react-buttons';
 import { DatePicker } from '@syncfusion/ej2-react-calendars';
 import { BeforeOpenEventArgs, DialogComponent, TooltipComponent } from '@syncfusion/ej2-react-popups';
@@ -79,7 +77,6 @@ function App() {
   const [selectedCount, setSelectedCount] = useState<number>(0);
   const [rowIndexValue, setRowIndexValue] = useState("0");
   const [cellIndexValue, setCellIndexValue] = useState("0");
-  const [totalCount, setTotalCount] = useState<number>(0);
   const [status, setStatus] = useState(false);
   const dropdownRefs = useRef<Record<string, DropDownListComponent>>({});
   const checkboxRefs = useRef<Record<string, CheckBoxComponent>>({});
@@ -92,12 +89,11 @@ function App() {
   const arabicStatus = useRef(false);
   const theme = useRef('material3');
   const displayMode = useRef('Mouse');
-  const [isDialog, setIsDialog] = useState(false);
+  const chipStatusRef = useRef<ChipListComponent | null>(null);
+  const uploadRef = useRef<UploaderComponent | null>(null);
   let [searchText, setSearchText] = useState<string>('');
   let [checkedStates, setCheckedStates] = useState<{ [key: string]: boolean }>({});
   let [expandCollapseValue, setExpandCollapseValue] = useState<string>("grouping");
-  let [isExpand, setIsExpand] = useState(true);
-  let [enableRtlListView, setenableRtlListView] = useState(false);
   let [selectedField, setSelectedField] = useState<string | null>(null);
   let [caseSensitiveChecked, setCaseSensitiveChecked] = useState<boolean>(false);
   let [ignoreAccentChecked, setIgnoreAccentChecked] = useState<boolean>(false);
@@ -105,8 +101,9 @@ function App() {
   let [switchStates, setSwitchStates] = useState<{ [key: string]: boolean }>({});
   let selectedItemRef = useRef<{ text: string; id: string } | null>(null);
   let [dropdownValues, setDropdownValues] = useState<{ [key: string]: string }>({});
-  const [checkState, setCheckState] = useState<{ [key: string]: boolean }>({});
   let listFields = { id: "id", text: "text" };
+  let isExpand: boolean = true;
+  let enableRtlListView : boolean = false;
   let menuFields: FieldSettingsModel = { text: 'text', value: 'id' };
   let root: Root | null = null; // 
   let showEditLabel: boolean = false;
@@ -126,13 +123,11 @@ function App() {
   let customerMailIDInput: HTMLElement;
   let shipCountryInput: HTMLElement;
   let orderIDInput: HTMLElement;
+  let gridInstance : GridComponent;
   let textboxInstance: TextBoxComponent;
-  let gridInstance: GridComponent;
-  let chipStatus: ChipListComponent;
   let dialogInstance: DialogComponent;
   let dialogObj: DialogComponent;
   let listObj!: ListViewComponent;
-  let uploadObj!: UploaderComponent;
   let previewRef!: HTMLElement | null;
   let sidebarobj = useRef(null);
   let selectedFilterType: string = "FilterBar";
@@ -495,8 +490,7 @@ function App() {
       { text: 'Material3', value: 'material3' },
       { text: 'Material3 Dark', value: 'material3-dark' },
       { text: 'Fluent', value: 'fluent' },
-      { text: 'Fluent Dark', value: 'fluent-dark' },
-      { text: 'Bootstrap5', value: 'bootstrap5' }
+      { text: 'Fluent Dark', value: 'fluent-dark' }
     ],
     localizationData: [
       { text: 'English', value: 'en-US', image: 'https://ej2.syncfusion.com/javascript/demos/src/tree-grid/images/USA.png' },
@@ -522,13 +516,13 @@ function App() {
       </div>);
     },
 
+    /* eslint-disable-next-line react/jsx-no-target-blank */
     productTemplate(props: any) {
       const customerName = props.CustomerName;
       return (
         <div>
           <a
             href={`/product-details/${customerName}`}
-            target="_blank"
             style={{ textDecoration: 'none', color: 'blue' }}
           >
             {props.ProductID}
@@ -555,7 +549,7 @@ function App() {
           <div className='settingsIconText' style={{ justifyContent: justify }}>
             <div>Ship Address</div>
           </div>
-          <span style={{
+          <span className='iconMarginAlign' style={{
             ...(enableRtlListView
               ? { marginLeft: '-68px' }
               : { marginLeft: '-8px', marginRight: '-30px' }
@@ -606,7 +600,7 @@ function App() {
             <span className="e-icons e-check-box icon"></span>
             <div>Verified</div>
           </div>
-          <span style={{
+          <span className='iconMarginAlign' style={{
             ...(enableRtlListView
               ? { marginLeft: '-35px', marginRight: '-43px' }
               : { marginLeft: '-45px', marginRight: '-30px' }
@@ -637,10 +631,10 @@ function App() {
             <span className="e-icons e-day icon"></span>
             <div>Order Date</div>
           </div>
-          <span style={{
+          <span className='iconMarginAlign' style={{
             ...(enableRtlListView
               ? { marginLeft: '-37px', marginRight: '-6px' }
-              : { marginLeft: '-8px', marginRight: '-30px' }
+              : { marginLeft: '-3px', marginRight: '-30px' }
             )
           }}>
             <MenuComponent
@@ -670,10 +664,10 @@ function App() {
             <span className="sf-icon-freight"></span>
             <div>Freight</div>
           </div>
-          <span style={{
+          <span className='iconMarginAlign' style={{
             ...(enableRtlListView
               ? { marginLeft: '-39px', marginRight: '-6px' }
-              : { marginLeft: '-8px', marginRight: '-30px' }
+              : { marginLeft: '-3px', marginRight: '-30px' }
             )
           }}>
             <MenuComponent
@@ -739,7 +733,7 @@ function App() {
           </div>
           <SidebarComponent id="listSidebar" ref={sidebarobj} enableDock={true}
             dockSize="0px" className="sidebar-list" width="350px" target=".listmaincontent" type="Auto" isOpen={true}>
-            <ListViewComponent id="listSidebarList" enableRtl={enableRtlListView} ref={(list: any) => listObj = list} dataSource={dropdownDataSource.listViewData} cssClass="e-template-list" height="451px" template={gridCommonTemplates.listTemplate} fields={listFields} select={gridCommonTemplates.OnSelect}>
+            <ListViewComponent id="listSidebarList" enableRtl={enableRtlListView} ref={(list: any) => listObj = list} dataSource={dropdownDataSource.listViewData} height='100%' cssClass="e-template-list" template={gridCommonTemplates.listTemplate} fields={listFields} select={gridCommonTemplates.OnSelect}>
               <Inject services={[Virtualization]} />
             </ListViewComponent>
           </SidebarComponent>
@@ -944,7 +938,7 @@ function App() {
             </div>
           )}
           <div id="upload" ref={(previewEle: any) => previewRef = previewEle}>
-            <UploaderComponent id='deffaultUpload' multiple={false} ref={(upload: any) => { uploadObj = upload; }} asyncSettings={gridCommonTemplates.path} selected={gridCommonTemplates.onupload} locale={'en-US'} allowedExtensions='.png, .jpg, .jpeg' />
+            <UploaderComponent id='deffaultUpload' multiple={false} ref={uploadRef} asyncSettings={gridCommonTemplates.path} selected={gridCommonTemplates.onupload} locale={'en-US'} allowedExtensions='.png, .jpg, .jpeg' />
           </div>
         </div>
       )
@@ -1985,7 +1979,6 @@ function App() {
       let labelElement: HTMLElement | null = null;
       if (typeof switchId === "object" && !isNullOrUndefined(switchId) && Array.isArray(switchId["items"])) {
         switchId["items"].some((item: any) => {
-          const labelClass = item.label?.replace(/\s+/g, "") + "-custom-label";
           labelElement = treeViewElement!.querySelector('label') as HTMLElement;
           return !!labelElement;
         });
@@ -2150,7 +2143,6 @@ function App() {
         );
       }
       else {
-        let textId = data.properties.text.replace(/\s/g, "_") + "_text";
         return (<div className="treeviewdiv">
           <div className="treeName">
             <div className="setting-row"><label style={{
@@ -2724,7 +2716,6 @@ function App() {
   const customComponentTemplates = {
 
     toolbarDialog: (selectedText: any) => {
-      setIsDialog(true);
       dialogObj?.show();
       let result = dropdownDataSource.listViewData.find((item) => item.text.includes(selectedText));
       if (result && listObj) {
@@ -2738,6 +2729,7 @@ function App() {
       }
     },
 
+    
     addPropertiesInsideDialogbox: (selectedListItem: string) => {
       if (!(selectedListItem in gridPropertiesConfigurations)) return null;
       const gridProperties = gridPropertiesConfigurations[selectedListItem as keyof GridPropertiesConfigurations];
@@ -2748,7 +2740,7 @@ function App() {
             <div className="treeviewdiv">
               <TooltipComponent ref={(t: any) => {
                 if (propertyFields && Array.isArray(propertyFields["items"])) {
-                  propertyFields["items"].some((item: any) => {
+                  propertyFields["items"].forEach((item: any) => {
                     if (t) tooltipRefs.current[item.label] = t;
                   });
                 } else {
@@ -2886,11 +2878,7 @@ function App() {
 
     trackingChipTemplate: (props: Orders): JSX.Element => {
       return (
-        <ChipListComponent ref={(chip: ChipListComponent | null) => {
-          if (chip) {
-            chipStatus = chip;
-          }
-        }}
+        <ChipListComponent ref={chipStatusRef}
           style={{ height: '25px', ...(enableRtlListView ? { gap: '5px' } : {}) }} enableRtl={enableRtlListView} text={props.TrackingStatus ? 'Paid' : 'Not Paid'} cssClass={props.TrackingStatus ? "chip-paid" : "chip-not-paid"}></ChipListComponent>
       );
     },
@@ -2898,7 +2886,7 @@ function App() {
     ratingTemplate: (props: Orders): JSX.Element => {
       return (
         <div>
-          <RatingComponent id={'ratingTempalte' + props.EmployeeID} enableRtl={enableRtlListView} showLabel={true} labelPosition='Left' precision='Half' labelTemplate="<span style='font-size:14px;'>${value}</span>" name={'Rating'} value={props.Rating} readOnly={true} cssClass='e-custom-rating'></RatingComponent>
+          <RatingComponent id={'ratingTempalte' + props.EmployeeID} enableRtl={enableRtlListView} showLabel={true} labelPosition='Left' precision='Half' labelTemplate={"<span style='font-size:14px;'>" + props.Rating + "</span>"} name={'Rating'} value={props.Rating} readOnly={true} cssClass='e-custom-rating'></RatingComponent>
         </div>
       );
     },
@@ -2960,15 +2948,6 @@ function App() {
         const endTime = new Date().getTime();
         const elapsedTime = (endTime - startTime);
         setLoadingTime(Number(elapsedTime));
-        let dataCount = 0;
-        if (Array.isArray(gridInstance.dataSource)) {
-          dataCount = gridInstance.dataSource.length;
-        } else if (gridInstance.dataSource instanceof DataManager) {
-          gridInstance.dataSource.executeQuery(new Query()).then((e: any) => {
-            setTotalCount(e.result.length);
-          });
-        }
-        setTotalCount(dataCount);
         gridInstance.scrollModule.refresh();
       }
     },
@@ -3106,6 +3085,7 @@ function App() {
     }
   };
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   const initialGridRender: JSX.Element = useMemo(() => {
     return (
       <GridComponent ref={(grid: GridComponent | null) => {
@@ -3331,10 +3311,6 @@ interface GridPropertiesConfigurations {
 interface GridPropertiesGroup {
   groupField: string;
   items: GridPropertiesConfig[];
-}
-
-interface ExtendedMenuItemModel extends MenuItemModel {
-  template?: any;
 }
 
 interface ChangeEventArgs {
