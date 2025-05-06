@@ -1,0 +1,532 @@
+/* Add a line to group the properties inside the dialog box */
+hr.separator-line {
+  border: none;
+  height: 1px;
+  background: #C4C7C5;
+}
+
+.image-container {
+  align-items: center;
+}
+
+.profile-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.email {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.Mapimage .e-image {
+  height: 13px;
+  width: 14px;
+}
+
+
+.parent-Grid-Container {
+  height: calc(97vh - 28px);
+  border: 1px solid #c4c7c5;
+}
+
+.e-groupfooterrow .e-summarycell {
+  background: #FFEFE3 !important;
+}
+
+tfoot .e-summaryrow .e-summarycell {
+  background: #E3F1FF !important;
+}
+
+tfoot .e-indentcell {
+  background: #E3F1FF !important;
+}
+
+/* To apply a right-side footer color that fills the gap in the last cell, ensure the footer spans the full width of the grid, including any empty space after the last column. */
+.e-grid .e-gridfooter,
+.e-grid .e-gridfooter .e-leftfreeze,
+.e-grid .e-gridfooter .e-rightfreeze,
+.e-grid .e-gridfooter .e-fixedfreeze {
+  background: #E3F1FF !important;
+}
+
+
+/* Icons are used in the menu to hide the default arrow indicator. */
+.custom-menu-column-name .e-menu-item[aria-label="Column Name"] .e-caret,
+.custom-menu-column-date .e-menu-item[aria-label="Column Date"] .e-caret,
+.custom-menu-column-number .e-menu-item[aria-label="Column Number"] .e-caret,
+.custom-menu-column-verified .e-menu-item[aria-label="Column Verified"] .e-caret,
+.chooser-settings .e-menu-item[aria-label="Column Chooser Menu"] .e-caret,
+.custom-menu-column-clipmode .e-menu-item[aria-label="Column Name"] .e-caret,
+.footer-sum .e-menu-item[aria-label="Footer Menu"] .e-caret,
+.footer-avg .e-menu-item[aria-label="Footer Menu"] .e-caret {
+  display: none !important;
+}
+
+
+/* The dialog box is opened to display the search container. */
+
+#dialogbox_dialog-content {
+  overflow: hidden;
+}
+
+.filter-container {
+  margin-left: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.search-column-group,
+.search-operator-group {
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+}
+
+.check-text {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-group {
+  margin-top: 10px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* The checkbox and its label text are not vertically aligned, so CSS ia applied to center-align properly. */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  /* Space between elements */
+}
+
+/* The 'Clear Filter' and 'Search' buttons are added using the Chip component, and the chip border is hidden using the following CSS. */
+.e-chip {
+  border: 0px !important;
+}
+
+/* The 'Clear Filter' and 'Search' buttons are implemented using the Chip component and are aligned to the right side using CSS. */
+#chip-choice {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  gap: 8px;
+}
+
+
+/* The checkbox background and border color are hidden using custom CSS styling. */
+.custom-checkbox .e-frame {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+/* Change Tick (Checkmark) Color */
+.custom-checkbox .e-check::after {
+  color: #646068 !important;
+}
+
+/* Change Hover Effect */
+.custom-checkbox:hover .e-frame {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.custom-checkbox .e-check::before {
+  color: #646068 !important;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.exclamation-container {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+.single-column-exclamation-container {
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px !important;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+/* The text style within the information icon is customized using CSS for better visual alignment and readability. */
+.e-icons .e-circle-info .icon {
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+/* The information icon is not aligned properly with the checkbox and its label text, so it is adjusted by setting the margin-top property using custom CSS. */
+.custom-checkbox .e-check,
+.custom-checkbox .e-label {
+  margin-top: -8px;
+}
+
+/* #example_dialog{
+  height:550px;
+} */
+
+#example_dialog .e-dlg-header-content {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+
+/* Spacing is applied between the 'Save' and 'Apply' buttons in the dialog box footer using custom CSS settings. */
+.e-dialog .e-footer-content {
+  padding-top: 15px !important;
+}
+
+#example_dialog .e-footer-content {
+  border-top: 1px solid #ccc;
+  /* Line above footer */
+}
+
+#listSidebar {
+  width: 175px !important;
+  height: 100% !important;
+}
+
+#example_dialog_dialog-content {
+  overflow: hidden;
+}
+
+#sblist-wrapper, #sidelistwrapper, .listmaincontent, #listSidebar, .e-content-animation {
+   height: 100% !important;
+}
+
+#listContent {
+  height: calc(100vh - 185px);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#sblist-wrapper .listcontent {
+  font-size: 14px;
+  padding: 15px;
+  margin-left: 170px;
+  
+}
+
+#sblist-wrapper.control-section {
+  padding: 0;
+  margin-left: -25px;
+  height : 100% !important;
+}
+
+#sblist-wrapper #left {
+  float: left;
+  width: 30px;
+  height: 47px;
+}
+
+#sblist-wrapper .sidebar-list {
+  z-index: 20 !important;
+}
+
+#sblist-wrapper .e-toolbar .e-icons {
+  font-size: 20px;
+}
+
+#sblist-wrapper .e-tbar-menu-icon:before {
+  content: '\e914';
+  font-family: 'sbicons';
+}
+
+#sidebarList {
+  display: inline-flex;
+  width: 100%;
+}
+
+#sidelistwrapper {
+  height: 100% !important;
+}
+
+
+/* CSS is used to customize the chip in the Payment column of the Grid to make it look better. */
+.chip-paid,
+.chip-not-paid {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 16px;
+  border: 2px solid #C4C7C5 !important;
+  /* Border for chip */
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.chip-paid::before,
+.chip-not-paid::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.chip-paid {
+  background-color: #e6f4ea;
+  /* Light green */
+  color: #205107 !important;
+}
+
+.chip-paid::before {
+  background-color: #205107;
+  /* Green dot */
+}
+
+.chip-not-paid {
+  background-color: #fdecea;
+  /* Light red */
+  color: #B3261E !important;
+}
+
+.chip-not-paid::before {
+  background-color: #B3261E;
+  /* Red dot */
+}
+
+/* CSS is used to customize the rating in the Rating column of the Grid to make it look better. */
+.e-rating-container.e-custom-rating .e-rating-item-list:hover .e-rating-item-container .e-rating-icon,
+.e-rating-container.e-custom-rating .e-rating-item-container .e-rating-icon {
+  background: linear-gradient(to right, #F29527 var(--rating-value), #d8d7d4 var(--rating-value));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+
+.e-rating-container.e-custom-rating.e-rtl .e-rating-item-list:hover .e-rating-item-container .e-rating-icon,
+.e-rating-container.e-custom-rating.e-rtl .e-rating-item-container .e-rating-icon {
+  background: linear-gradient(to right, #F29527 var(--rating-value), #d8d7d4 var(--rating-value));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.e-rating-container.e-custom-rating .e-rating-item-list:hover .e-rating-item-container .e-rating-icon,
+.e-rating-container.e-custom-rating .e-rating-item-container .e-rating-icon {
+  /* To change rating symbol border color */
+  -webkit-text-stroke: 0px #F29527;
+}
+
+/* The selected value in the Payment dropdown is not center-aligned, so text alignment needs to be adjusted using CSS. */
+.e-remain {
+  padding-top: 5px !important;
+}
+
+/* spacing issue between the Dialog Settings and Column Chooser icons in the Grid's toolbar that needs to be adjusted */
+.chooser-settings.e-menu-wrapper ul .e-menu-item.e-menu-caret-icon,
+.chooser-settings.e-menu-container ul .e-menu-item.e-menu-caret-icon {
+  padding-right: 0px !important;
+  padding: 0px 10px 0px 10px !important;
+}
+
+/* single column settings icon postion adjustment */
+.iconviewdiv {
+  margin-top: 6px;
+}
+
+.fluent-dark .country_image, .fluent .country_image {
+  margin-left: 10px;
+}
+
+
+.treeviewdiv {
+  margin-top: 2px;
+}
+
+.selectchip {
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+/* To remove the grey background color when hovering over the icon, and to prevent the hover effect from appearing on the icon after the menu is opened and a menu item is hovered, apply custom CSS to override the default hover and focus styles. */
+.custom-menu-column-date .e-menu-item:hover,
+.custom-menu-column-date .e-menu-item.e-hover,
+.custom-menu-column-date .e-menu-item.e-focused,
+.custom-menu-column-date .e-menu-item.e-selected,
+.custom-menu-column-number .e-menu-item:hover,
+.custom-menu-column-number .e-menu-item.e-hover,
+.custom-menu-column-number .e-menu-item.e-focused,
+.custom-menu-column-number .e-menu-item.e-selected,
+.custom-menu-column-verified .e-menu-item:hover,
+.custom-menu-column-verified .e-menu-item.e-hover,
+.custom-menu-column-verified .e-menu-item.e-focused,
+.custom-menu-column-verified .e-menu-item.e-selected .custom-menu-column-clipmode .e-menu-item:hover,
+.custom-menu-column-clipmode .e-menu-item.e-hover,
+.custom-menu-column-clipmode .e-menu-item.e-focused,
+.custom-menu-column-clipmode .e-menu-item.e-selected {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+
+.footer-sum .e-menu-item[aria-label="Sum"] .e-caret,
+.footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.footer-sum .e-menu-item[aria-label="Min"] .e-caret,
+.footer-sum .e-menu-item[aria-label="Max"] .e-caret,
+.footer-sum .e-menu-item[aria-label="Count"] .e-caret {
+  margin-top: 3px !important;
+}
+
+.fluent-dark .footer-sum .e-menu-item[aria-label="Sum"],
+.fluent .footer-sum .e-menu-item[aria-label="Sum"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Average"],
+.fluent .footer-sum .e-menu-item[aria-label="Average"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Min"],
+.fluent .footer-sum .e-menu-item[aria-label="Average"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Max"],
+.fluent .footer-sum .e-menu-item[aria-label="Max"],
+.fluent-dark .footer-sum .e-menu-item[aria-label="Count"], 
+.fluent .footer-sum .e-menu-item[aria-label="Count"] {
+  margin-top: -8px !important;
+}
+
+.fluent-dark .footer-sum .e-menu-item[aria-label="Sum"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Sum"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Min"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Average"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Max"] .e-caret,
+.fluent .footer-sum .e-menu-item[aria-label="Max"] .e-caret,
+.fluent-dark .footer-sum .e-menu-item[aria-label="Count"] .e-caret, 
+.fluent .footer-sum .e-menu-item[aria-label="Count"] .e-caret {
+  margin-top: 2px !important;
+}
+
+/* When the RTL checkbox is enabled in the single-column settings, the position shifts slightly downward, so a top margin adjustment is required to correct the alignment. */
+.grid-line .e-checkbox-wrapper.e-rtl .e-frame,
+.custom-menu-column-verified .e-checkbox-wrapper.e-rtl .e-frame,
+.custom-menu-column-clipmode .e-checkbox-wrapper.e-rtl .e-frame,
+.custom-menu-column-number .e-checkbox-wrapper.e-rtl .e-frame,
+.custom-menu-column-date .e-checkbox-wrapper.e-rtl .e-frame,
+.footer-sum .e-checkbox-wrapper.e-rtl .e-frame {
+  margin-top: -10px;
+}
+
+.templateText {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.groupCaptionMinText {
+  background-color: #205107;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 31px;
+}
+
+.groupCaptionMaxText {
+  background-color: #B3261E;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 31px;
+}
+
+
+.settingsIconAlignment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settingsIconText {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 6px;
+}
+
+.iconAlignment {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.e-grid .e-summarycell[index="12"] {
+  padding: 0px 0px;
+}
+
+
+/* Hide the toggle button for a specific column even when the "showToggleButton" option is enabled in the grouping settings. */
+th[aria-colindex="12"] .e-grptogglebtn,
+th[aria-colindex="10"] .e-grptogglebtn,
+th[aria-colindex="11"] .e-grptogglebtn,
+th[aria-colindex="8"] .e-grptogglebtn,
+th[aria-colindex="15"] .e-grptogglebtn {
+  display: none !important;
+}
+
+/* Remove the hover effect from the menu item specifically used for the aggregate section. */
+.footer-sum .e-menu-item[aria-label="Sum"]:hover,
+.footer-sum .e-menu-item[aria-label="Sum"].e-hover,
+.footer-sum .e-menu-item[aria-label="Sum"].e-focused,
+.footer-sum .e-menu-item[aria-label="Sum"].e-selected,
+.footer-sum .e-menu-item[aria-label="Average"]:hover,
+.footer-sum .e-menu-item[aria-label="Average"].e-hover,
+.footer-sum .e-menu-item[aria-label="Average"].e-focused,
+.footer-sum .e-menu-item[aria-label="Average"].e-selected,
+.footer-sum .e-menu-item[aria-label="Min"]:hover,
+.footer-sum .e-menu-item[aria-label="Min"].e-hover,
+.footer-sum .e-menu-item[aria-label="Min"].e-focused,
+.footer-sum .e-menu-item[aria-label="Min"].e-selected .footer-sum .e-menu-item[aria-label="Max"]:hover,
+.footer-sum .e-menu-item[aria-label="Max"].e-hover,
+.footer-sum .e-menu-item[aria-label="Max"].e-focused,
+.footer-sum .e-menu-item[aria-label="Max"].e-selected,
+.footer-sum .e-menu-item[aria-label="Count"]:hover,
+.footer-sum .e-menu-item[aria-label="Count"].e-hover,
+.footer-sum .e-menu-item[aria-label="Count"].e-focused,
+.footer-sum .e-menu-item[aria-label="Count"].e-selected {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+
+/* image and text alignment for the empty records */
+.emptyRecordTemplate {
+  text-align: left;
+}
+
+.e-emptyRecord {
+  display: block;
+  margin-left: 120px;
+}
+
+/* The alignment of the intermediate checkbox in the Verified column when RTL mode is enabled. */
+.e-filterUi_input .e-checkbox-wrapper.e-rtl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.e-dlg-content {
+  height: 100% !important;
+}
